@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/aparelho_background_r" android:left="57dp" android:width="259dp" android:height="135dp"/>
+    <item android:drawable="@drawable/aparelho_background_l" android:left="0dp" android:width="57dp" android:height="135dp"/>
+</layer-list>

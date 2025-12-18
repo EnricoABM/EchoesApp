@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.nfc.ReaderNfcActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tela_leitor_nfc_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/titulo_leitor_nfc"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/tela_leitor_nfc_imagem"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/imagem_tela_leitor"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_leitor_nfc_titulo"/>
+
+    <TextView
+        android:id="@+id/tela_leitor_nfc_mensagem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Aproxime a Tag"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_leitor_nfc_imagem"/>
+
+    <ImageButton
+        android:id="@+id/tela_leitor_nfc_play"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/icone_play"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        android:contentDescription="Botão"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_leitor_nfc_mensagem"
+        android:layout_marginTop="32dp" />
+
+    <Button
+        android:id="@+id/tela_leitor_nfc_botao_config"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="100dp"
+        android:text="Configurar" />
+
+    <Button
+        android:id="@+id/tela_leitor_nfc_botao_gravar"
+        style="?attr/materialButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="100dp"
+        android:text="Gravar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

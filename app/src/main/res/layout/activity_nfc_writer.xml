@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.nfc.writer.WriterNfcActivity">
+
+    <ImageButton
+        android:id="@+id/tela_nfc_gravar_voltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/back_arrow"
+        android:contentDescription="Voltar"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tela_nfc_gravar_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Gravador NFC"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_nfc_gravar_voltar" />
+
+    <Spinner
+        android:id="@+id/tela_nfc_gravar_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:minWidth="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_nfc_gravar_titulo" />
+
+    <ImageView
+        android:id="@+id/tela_nfc_gravar_imagem"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="Imagem do animal selecionado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_nfc_gravar_animal"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tela_nfc_gravar_posicao_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Posição"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tela_nfc_gravar_imagem"
+        app:layout_constraintTop_toBottomOf="@+id/tela_nfc_gravar_imagem" />
+
+    <Spinner
+        android:id="@+id/tela_nfc_gravar_posicao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minWidth="150dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tela_nfc_gravar_posicao_texto"
+        app:layout_constraintEnd_toEndOf="@+id/tela_nfc_gravar_imagem"
+        app:layout_constraintStart_toEndOf="@+id/tela_nfc_gravar_posicao_texto" />
+
+    <Button
+        android:id="@+id/tela_nfc_gravar_botao_gravar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="32dp"
+        android:text="Gravar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tela_nfc_gravar_posicao_texto"
+        app:layout_constraintVertical_bias="0.8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

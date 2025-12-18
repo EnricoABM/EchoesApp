@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.perfil.PerfilFragment"
+    android:padding="34dp" >
+
+    <TextView
+        android:id="@+id/tela_perfil_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/roboto"
+        android:text="@string/titulo_perfil"
+        android:textColor="@color/black"
+        android:textSize="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:id="@+id/tela_perfil_texto_nome"
+        android:layout_marginTop="200dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="example"
+        android:layout_marginTop="220dp"
+        android:id="@+id/tela_perfil_campo_nome"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:longClickable="true"
+        android:background="@null" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        android:id="@+id/tela_perfil_texto_email"
+        android:layout_marginTop="270dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="example"
+        android:layout_marginTop="290dp"
+        android:id="@+id/tela_perfil_campo_email"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:longClickable="true"
+        android:background="@null" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Senha"
+        android:id="@+id/tela_perfil_texto_senha"
+        android:layout_marginTop="340dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="example"
+        android:layout_marginTop="360dp"
+        android:id="@+id/tela_perfil_campo_senha"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:longClickable="true"
+        android:background="@null" />
+
+    <Button
+        android:id="@+id/tela_perfil_botao"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_marginTop="500dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Alterar Dados"
+        android:textSize="18dp" />
+
+</FrameLayout>

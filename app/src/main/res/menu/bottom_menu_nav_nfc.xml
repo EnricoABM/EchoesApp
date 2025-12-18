@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/icone_leitor"
+        android:icon="@drawable/icone_nfc_reader"
+        android:title="Loja" />
+    <item
+        android:id="@+id/icone_config_cel"
+        android:icon="@drawable/icone_aparelhos_inactive"
+        android:title="Aparelhos" />
+    <item
+        android:id="@+id/icone_gravador"
+        android:icon="@drawable/icone_perfil_inactive"
+        android:title="Perfil" />
+</menu>

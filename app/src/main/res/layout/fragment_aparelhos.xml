@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.aparelhos.AparelhosFragment">
+
+    <TextView
+        android:id="@+id/tela_aparelhos_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/roboto"
+        android:text="@string/titulo_aparelhos"
+        android:textColor="@color/black"
+        android:textSize="48dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tela_aparelhos_recycler"
+        android:layout_width="344dp"
+        android:layout_height="316dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/tela_aparelhos_botao"
+        android:layout_width="161dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="500dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Configurar"
+        android:textSize="18dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tela_aparelhos_botao_nfc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/smartphone_icon"
+        android:layout_marginTop="570dp"
+        android:layout_marginLeft="300dp"/>
+
+</FrameLayout>
