@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,7 +20,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoIot"
         tools:targetApi="31">
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ProjetoIot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.aparelhos.Devices"
+            android:exported="false"
+            android:label="@string/title_activity_devices"
+            android:theme="@style/Theme.ProjetoIot" />
         <activity
             android:name=".view.nfc.writer.WriterNfcActivity"
             android:exported="false"
@@ -27,25 +48,18 @@
         <activity
             android:name=".view.nfc.ReaderNfcActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".view.aparelhoconfig.AparelhoConfigActivity"
             android:exported="false"
-            android:theme="@style/Theme.ProjetoIot"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.MainActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ProjetoIot" />
     </application>
 
 </manifest>

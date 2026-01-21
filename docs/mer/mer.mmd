@@ -1,0 +1,30 @@
+---
+config:
+  theme: neutral
+  layout: dagre
+---
+erDiagram
+
+    Animal ||--|{ ListeningPoint: tem
+    ListeningPoint ||--|{ Disease: disponibiliza
+    ListeningPoint ||--|| Disease: "reproduz no momento"
+
+    Animal {
+        Int id PK
+        String name
+        String imageUrl
+    }
+
+    ListeningPoint {
+        Int id PK
+        String positionName
+        Int animalFk FK
+        Int activeDisease FK
+    }
+
+    Disease {
+        Int id PK
+        String name
+        String audioUrl
+        Int listeningPointId FK
+    }

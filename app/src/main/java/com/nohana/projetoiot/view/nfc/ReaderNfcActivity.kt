@@ -1,6 +1,5 @@
 package com.nohana.projetoiot.view.nfc
 
-import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
@@ -15,11 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.projetoic.service.DiseaseMidiaPlayer
 import com.nohana.projetoiot.R
-import com.nohana.projetoiot.controller.AnimalController
 import com.nohana.projetoiot.model.TagNfc
-import com.nohana.projetoiot.modelview.AnimalModelView
+import com.nohana.projetoiot.viewmodel.AnimalModelView
 import com.nohana.projetoiot.view.nfc.config.ConfigNfcActivity
 import com.nohana.projetoiot.view.nfc.writer.WriterNfcActivity
 

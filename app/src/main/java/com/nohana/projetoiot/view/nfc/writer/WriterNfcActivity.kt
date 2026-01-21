@@ -8,7 +8,6 @@ import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
-import android.nfc.tech.NfcF
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -23,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.nohana.projetoiot.R
 import com.nohana.projetoiot.model.TagNfc
-import com.nohana.projetoiot.modelview.AnimalModelView
+import com.nohana.projetoiot.viewmodel.AnimalModelView
 
 class WriterNfcActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton

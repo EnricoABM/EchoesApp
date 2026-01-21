@@ -1,0 +1,90 @@
+---
+config:
+  theme: neutral
+  look: neo
+---
+classDiagram
+    BluetoothController "1" *-- "1" BluetoothReceiver: Faz parte
+    BluetoothController "1" *-- "1" BluetoothDataTrasferService: Faz parte
+    BluetoothController "1" -- "*" Device: Conhece
+
+    BroadcastReceiver <|.. BluetoothReceiver: Herda
+
+    BluetoothDataTrasferService "1" .. "*" BluetoothMessage: Envia
+
+    Device "*" -- "1" BluetoothDevicesUiState: Apresenta
+
+    BluetoothDevicesUiState "1" -- "1" BluetoothViewModel: Cria
+    BluetoothViewModel "1" -- "1" BluetoothController: Serve
+    BluetoothViewModel "1" -- "1" DevicesActivity: Supri
+
+    class BluetoothController {
+
+        +scannedDevices: StateFlow~Device~
+        -_scannedDevices: MutableStateFlow~Device~
+        +isConnected: StateFlow~Boolean~
+        -_isConnected: MutableStateFlow~Boolean~
+        +errors: SharedFlow~String~
+        -_errors: MutableSharedFlow~String~
+
+        -bleManager: BluetoothManager?
+        -bleAdapter: BluetoothAdapter?
+        -bleReceiver: BluetoothReceiver
+
+        -clientBleSocket: BluetoothSocket
+        -bleDataService: BluetoothDataTrasferService
+
+        +startScan()
+        +stopScan()
+        +closeConnection()
+        +release()
+
+        +connectToDevice(device: Device) BluetoothDevice
+        +sendMessage(message: BluetoothMessage)
+
+        -hasPermission(permission: String) Boolean
+    }
+
+
+
+    class BroadcastReceiver {
+        <<abstract>>
+        +onReceive(context: Context, intent: Intent)*
+    }
+
+    class BluetoothReceiver {
+        +onReceive(context: Context, intent: Intent)
+    }
+
+    class Device {
+        -name: String
+        -address: String
+    }
+
+    class BluetoothDataTrasferService {
+        +sendMessage(message: BluetoothMessage)
+    }
+
+    class BluetoothMessage {
+        -message: String
+        +toByteArray() ByteArray
+    }
+
+    class BluetoothDevicesUiState {
+        -devices: List~Device~
+    }
+
+    class BluetoothViewModel {
+        -controller: BluetoothController
+        -_state: MutableStateFlow~BluetoothDevicesUiState~
+        +state: BluetootDevicesUiState
+        +startScan()
+        +stopScan()
+        +sendMessage(message: BluetoothMessage)
+        +connectToDevice(device: BluetoothDevice)
+        +disconectFromDevice()
+    }
+
+    class DevicesActivity {
+        -viewmodel: BluetoothViewModel
+    }

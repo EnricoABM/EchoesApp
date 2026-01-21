@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nohana.projetoiot.R
-import com.nohana.projetoiot.modelview.AnimalModelView
+import com.nohana.projetoiot.viewmodel.AnimalModelView
 
 /**
  * Activity responsável pela configuração de pontos de escuta associados a um animal.

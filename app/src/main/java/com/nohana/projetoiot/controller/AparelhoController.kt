@@ -14,10 +14,10 @@ class AparelhoController {
 
     fun initDevices() {
 
-        var a1 = Animal("Cachorro", R.drawable.cachorro)
-
-        var d1 = Device("Aparelho 1", a1, false)
-
-        devices.add(d1)
+//        var a1 = Animal("Cachorro", R.drawable.cachorro)
+//
+//        var d1 = Device("Aparelho 1", a1, false)
+//
+//        devices.add(d1)
     }
 }

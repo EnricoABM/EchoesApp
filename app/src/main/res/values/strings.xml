@@ -50,4 +50,6 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_reader_view">ReaderView</string>
+    <string name="title_activity_devices">Devices</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -17,8 +17,8 @@ class AparelhoAdapter(val list : List<Device>) : RecyclerView.Adapter<AparelhoVi
         var aparelho = list[position]
 
         holder.titulo.text = aparelho.name
-        holder.info.text = aparelho.animal.name
-        holder.checkBox.isChecked = aparelho.isChecked
+//        holder.info.text = aparelho.animal.name
+//        holder.checkBox.isChecked = aparelho.isChecked
     }
 
     override fun getItemCount(): Int {

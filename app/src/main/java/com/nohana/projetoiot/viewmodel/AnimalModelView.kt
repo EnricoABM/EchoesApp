@@ -1,4 +1,4 @@
-package com.nohana.projetoiot.modelview
+package com.nohana.projetoiot.viewmodel
 
 import android.app.Application
 import android.util.Log
