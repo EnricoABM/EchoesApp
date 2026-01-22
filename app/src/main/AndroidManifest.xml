@@ -2,9 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- Permissões necessárias para conectar e escanear a partir do Android 12 -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!-- Se você NÃO usa a varredura para obter a localização do usuário -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+    <!-- Permissões para Android 11 (API 30) e inferior -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- A localização fina é obrigatória para escaneamento no Android 6 a 11 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
     <uses-permission android:name="android.permission.NFC" />

@@ -8,16 +8,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.nohana.projetoiot.view.ui.theme.ProjetoIotTheme
 
 @Composable
 fun TitleHeader(title: String) {
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
+            fontSize = 36.sp,
             text = title
         )
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun PreviewTitle() {
+    ProjetoIotTheme() {
+        TitleHeader("Header")
     }
 }

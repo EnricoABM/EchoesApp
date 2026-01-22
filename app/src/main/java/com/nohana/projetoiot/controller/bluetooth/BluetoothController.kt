@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.nohana.projetoiot.model.Device
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +30,7 @@ class BluetoothController (
     }
 
     private val bleReceiver = BluetoothReceiver { device ->
+        Log.d("BL", "${device.name} e ${device.address}")
             _scannedDevices.update { devices ->
                 val newDevice = BluetoothDeviceMapper.toDeviceModel(device)
                 if (newDevice in devices) devices else devices + newDevice
@@ -38,14 +40,14 @@ class BluetoothController (
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_SCAN)
     fun startScan() {
-        if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN))
-            return
+//        if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN))
+//            return
 
         context.registerReceiver(
             bleReceiver,
-            IntentFilter(BluetoothDevice.ACTION_FOUND)
+            IntentFilter(android.bluetooth.BluetoothDevice.ACTION_FOUND)
         )
-
+        Log.d("BL", "Adaptador: ${bleAdapter.toString()}")
         bleAdapter?.startDiscovery()
     }
 
@@ -55,6 +57,7 @@ class BluetoothController (
             return
 
         bleAdapter?.cancelDiscovery()
+        context.unregisterReceiver(bleReceiver)
     }
 
     private fun hasPermission(permission: String): Boolean {
