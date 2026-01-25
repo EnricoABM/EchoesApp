@@ -43,8 +43,9 @@ class BluetoothController (
         Log.d("BL", "${device.name} e ${device.address}")
             _scannedDevices.update { devices ->
                 val newDevice = BluetoothDeviceMapper.toDeviceModel(device)
+                Log.d("BL", devices.toString())
                 if (newDevice in devices) devices else devices + newDevice
-        }
+            }
     }
     private var bleSocket: BluetoothSocket? = null
 
@@ -72,29 +73,34 @@ class BluetoothController (
     }
 
     @SuppressLint("MissingPermission")
-    fun connectToDevice(device: Device): Unit {
-
-//            if(!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+    fun connectToDevice(device: Device): Flow<ConnectionResult> {
+        return flow {
+//           if(!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
 //                throw SecurityException("Permissão Faltante: BLUETOOTH_CONNECT")
 //            }
 
-        bleSocket = bleAdapter
-            ?.getRemoteDevice(device.address)
-            ?.createRfcommSocketToServiceRecord(UUID.fromString(SERVICE_UUID))
+            bleSocket = bleAdapter
+                ?.getRemoteDevice(device.address)
+                ?.createRfcommSocketToServiceRecord(UUID.fromString(SERVICE_UUID))
 
-        Log.d("BL" , "Conectando se ao dispostivo: ${device.name}")
-        stopScan()
+            Log.d("BL" , "Conectando se ao dispostivo: ${device.name}")
+            stopScan()
 
-        bleSocket?.let { socket ->
-            try {
-                socket.connect()
-                Log.d("BL", "Dispositivo Conectado")
-                bleDataService = BluetoothDataTrasferService(socket)
-            } catch (e : IOException) {
-                socket.close()
-                bleSocket = null
+            bleSocket?.let { socket ->
+                try {
+                    socket.connect()
+                    Log.d("BL", "Dispositivo Conectado")
+                    bleDataService = BluetoothDataTrasferService(socket)
+                    emit(ConnectionResult.ConnectionEstablished)
+                } catch (e : IOException) {
+                    socket.close()
+                    bleSocket = null
+                    emit(ConnectionResult.Error("Conexão Interrompida"))
+                }
             }
-        }
+        }.onCompletion {
+            closeConnection()
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun sendMessage(message: String) {
