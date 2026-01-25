@@ -15,6 +15,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -141,8 +142,16 @@ class MainActivity : ComponentActivity() {
                     ) {
                         when {
                             !state.devices.isEmpty() -> {
-                                items(state.devices) { device ->
-                                    Text("${device.name}")
+                                items(
+                                    items = state.devices,
+                                ) { device ->
+                                    Text(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable { viewModel.connectToDevice(device) },
+                                        text = "${device.name}",
+                                        textAlign = TextAlign.Center
+                                    )
                                 }
                             }
                             else -> {

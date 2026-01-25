@@ -12,6 +12,7 @@ import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.nohana.projetoiot.controller.bluetooth.BluetoothController
+import com.nohana.projetoiot.model.Device
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -42,5 +43,9 @@ class BluetoothViewModel(
     fun stopScan() {
         Log.d("BL", "Parando Varredura")
         controller.stopScan()
+    }
+
+    fun connectToDevice(device: Device): Unit {
+        controller.connectToDevice(device)
     }
 }

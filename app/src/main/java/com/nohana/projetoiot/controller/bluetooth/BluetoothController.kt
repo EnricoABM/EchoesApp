@@ -1,18 +1,27 @@
 package com.nohana.projetoiot.controller.bluetooth
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.nohana.projetoiot.model.Device
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.update
+import java.io.IOException
+import java.util.UUID
 
 class BluetoothController (
     private val context: Context
@@ -29,6 +38,7 @@ class BluetoothController (
         bleManager?.adapter
     }
 
+    @SuppressLint("MissingPermission")
     private val bleReceiver = BluetoothReceiver { device ->
         Log.d("BL", "${device.name} e ${device.address}")
             _scannedDevices.update { devices ->
@@ -36,7 +46,9 @@ class BluetoothController (
                 if (newDevice in devices) devices else devices + newDevice
         }
     }
+    private var bleSocket: BluetoothSocket? = null
 
+    private var bleDataService: BluetoothDataTrasferService? = null
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_SCAN)
     fun startScan() {
@@ -53,15 +65,65 @@ class BluetoothController (
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_SCAN)
     fun stopScan() {
-        if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN))
-            return
+//        if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN))
+//            return
 
         bleAdapter?.cancelDiscovery()
+    }
+
+    @SuppressLint("MissingPermission")
+    fun connectToDevice(device: Device): Unit {
+
+//            if(!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+//                throw SecurityException("Permissão Faltante: BLUETOOTH_CONNECT")
+//            }
+
+        bleSocket = bleAdapter
+            ?.getRemoteDevice(device.address)
+            ?.createRfcommSocketToServiceRecord(UUID.fromString(SERVICE_UUID))
+
+        Log.d("BL" , "Conectando se ao dispostivo: ${device.name}")
+        stopScan()
+
+        bleSocket?.let { socket ->
+            try {
+                socket.connect()
+                Log.d("BL", "Dispositivo Conectado")
+                bleDataService = BluetoothDataTrasferService(socket)
+            } catch (e : IOException) {
+                socket.close()
+                bleSocket = null
+            }
+        }
+    }
+
+    suspend fun sendMessage(message: String) {
+        if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT))
+            return
+
+        if (bleDataService == null)
+            return
+
+        val bleMessage = BluetoothMessage("Ola")
+
+        bleDataService?.sendMessage(bleMessage)
+    }
+
+    fun closeConnection() {
+        bleSocket?.close()
+        bleSocket = null
+    }
+
+    fun release() {
         context.unregisterReceiver(bleReceiver)
+        closeConnection()
     }
 
     private fun hasPermission(permission: String): Boolean {
         return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
 
+    companion object {
+        val SERVICE_UUID = "00001101-0000-1000-8000-00805F9B34FB"
+    }
 }
