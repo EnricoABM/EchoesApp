@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.icu.text.CaseMap
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,12 +26,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,19 +106,59 @@ class MainActivity : ComponentActivity() {
 
         val viewModel = BluetoothViewModel(this)
 
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContent {
-            ProjetoIotTheme {
+            ProjetoIotTheme(
+                dynamicColor = false,
+                darkTheme = false
+            ) {
                 checkAndRequestPermission()
 
                 val state by viewModel.state.collectAsState()
+                Surface(
+                    modifier = Modifier
+                        .background(Color.White)
+                        .fillMaxSize()
+                ) {
+                    when {
+                        state.isConnected -> {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                TitleHeader("Dispositivo")
+                                Text("Conectado")
 
-                DevicesScreen(
-                    state,
-                    viewModel::startScan,
-                    viewModel::stopScan,
-                    viewModel::connectToDevice,
-                )
+                                Button(
+                                    onClick = { viewModel.sendMessage("Olá") }
+                                ) {
+                                    Text("Dizer Olá")
+                                }
+
+                                Button(
+                                    onClick = { viewModel.disconnectFromDevice() }
+                                ) {
+                                    Text("Desconectar")
+                                }
+                            }
+                        }
+                        state.isConnecting -> {
+                            Column() {
+                                CircularProgressIndicator()
+                                Text("Conectando...")
+                            }
+                        }
+                        else -> {
+                            DevicesScreen(
+                                state,
+                                viewModel::startScan,
+                                viewModel::stopScan,
+                                viewModel::connectToDevice,
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -187,15 +232,6 @@ fun DevicesScreen(
                 )
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            Button(
-                onClick = {Log.d("BL VIEW", state.devices.toString())}
-            ) {
-                Text("Mostrar Lista")
-            }
-        }
+
     }
 }

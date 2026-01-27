@@ -99,18 +99,17 @@ class BluetoothController (
                 }
             }
         }.onCompletion {
-            closeConnection()
+            // closeConnection()
         }.flowOn(Dispatchers.IO)
     }
 
     suspend fun sendMessage(message: String) {
-        if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT))
-            return
-
+//        if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT))
+//            return
         if (bleDataService == null)
             return
 
-        val bleMessage = BluetoothMessage("Ola")
+        val bleMessage = BluetoothMessage(message)
 
         bleDataService?.sendMessage(bleMessage)
     }
