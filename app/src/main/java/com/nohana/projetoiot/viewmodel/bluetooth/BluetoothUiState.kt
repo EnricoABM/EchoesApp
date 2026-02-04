@@ -1,6 +1,6 @@
 package com.nohana.projetoiot.viewmodel.bluetooth
 
-import com.nohana.projetoiot.model.Device
+import com.nohana.projetoiot.model.bluetooth.Device
 
 data class BluetoothUiState(
     val devices: List<Device> = emptyList(),

@@ -1,4 +1,4 @@
-package com.nohana.projetoiot.model
+package com.nohana.projetoiot.model.nfc
 
 /**
  * Representa uma doença que pode ser associada a um ponto de escuta de um animal.

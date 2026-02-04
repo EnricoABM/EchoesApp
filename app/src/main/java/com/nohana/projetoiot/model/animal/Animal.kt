@@ -1,6 +1,4 @@
-package com.nohana.projetoiot.model
-
-import kotlin.collections.mutableListOf
+package com.nohana.projetoiot.model.animal
 
 data class Animal (
     var id: Int = 0,

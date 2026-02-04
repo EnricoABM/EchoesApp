@@ -1,7 +1,7 @@
 package com.nohana.projetoiot.database.repository
 
 import com.nohana.projetoiot.controller.animal.AnimalMapper
-import com.nohana.projetoiot.model.Animal
+import com.nohana.projetoiot.model.animal.Animal
 import com.nohana.projetoiot.database.dao.AnimalDao
 import com.nohana.projetoiot.database.dao.DiseaseDao
 import com.nohana.projetoiot.database.dao.ListeningPointDao
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 //import android.util.Log
 //import androidx.lifecycle.LiveData
 //import androidx.lifecycle.map
-//import com.nohana.projetoiot.model.Animal
+//import com.nohana.projetoiot.model.animal.Animal
 //import com.nohana.projetoiot.model.database.dao.DiseaseDao
 //import com.nohana.projetoiot.model.database.dao.ListeningPointDao
 //import com.nohana.projetoiot.model.database.dao.AnimalDao

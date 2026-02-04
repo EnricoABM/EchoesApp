@@ -1,7 +1,7 @@
 package com.nohana.projetoiot.controller.animal
 
 import android.content.Context
-import com.nohana.projetoiot.model.Animal
+import com.nohana.projetoiot.model.animal.Animal
 import com.nohana.projetoiot.database.AnimalDatabase
 import com.nohana.projetoiot.database.repository.AnimalRepository
 import kotlinx.coroutines.flow.Flow

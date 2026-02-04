@@ -1,4 +1,4 @@
-package com.nohana.projetoiot.model
+package com.nohana.projetoiot.model.animal
 
 
 data class ListeningPoint(

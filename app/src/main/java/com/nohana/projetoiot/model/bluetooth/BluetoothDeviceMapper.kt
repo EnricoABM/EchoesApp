@@ -1,7 +1,6 @@
-package com.nohana.projetoiot.controller.bluetooth
+package com.nohana.projetoiot.model.bluetooth
 
 import android.bluetooth.BluetoothDevice
-import com.nohana.projetoiot.model.Device
 
 class BluetoothDeviceMapper {
     companion object {

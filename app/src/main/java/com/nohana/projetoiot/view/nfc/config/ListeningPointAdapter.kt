@@ -9,7 +9,7 @@
 //import android.widget.ArrayAdapter
 //import androidx.recyclerview.widget.RecyclerView
 //import com.nohana.projetoiot.R
-//import com.nohana.projetoiot.model.ListeningPoint
+//import com.nohana.projetoiot.model.animal.ListeningPoint
 //
 ///**
 // * Adapter para exibir uma lista de [ListeningPoint] em um [RecyclerView].

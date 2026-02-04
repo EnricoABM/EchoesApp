@@ -2,7 +2,7 @@
 //
 //import android.media.AudioAttributes
 //import android.media.MediaPlayer
-//import com.nohana.projetoiot.model.Disease
+//import com.nohana.projetoiot.model.animal.Disease
 //
 //class DiseaseMidiaPlayer {
 //    private var mediaPlayer: MediaPlayer

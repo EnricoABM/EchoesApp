@@ -1,4 +1,4 @@
-package com.nohana.projetoiot.controller.bluetooth
+package com.nohana.projetoiot.model.bluetooth
 
 class BluetoothMessage(
     private val message: String

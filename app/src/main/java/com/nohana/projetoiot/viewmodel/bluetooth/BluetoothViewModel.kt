@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nohana.projetoiot.controller.bluetooth.BluetoothController
 import com.nohana.projetoiot.controller.bluetooth.ConnectionResult
-import com.nohana.projetoiot.model.Device
+import com.nohana.projetoiot.model.bluetooth.Device
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

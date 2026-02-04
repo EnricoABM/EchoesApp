@@ -21,7 +21,7 @@
 //import androidx.appcompat.app.AppCompatActivity
 //import androidx.lifecycle.ViewModelProvider
 //import com.nohana.projetoiot.R
-//import com.nohana.projetoiot.model.TagNfc
+//import com.nohana.projetoiot.model.nfc.TagNfc
 ////import com.nohana.projetoiot.viewmodel.AnimalModelView
 //
 //class WriterNfcActivity : AppCompatActivity() {

@@ -4,9 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nohana.projetoiot.controller.animal.AnimalController
-import com.nohana.projetoiot.model.Animal
-import com.nohana.projetoiot.model.Disease
-import kotlinx.coroutines.flow.Flow
+import com.nohana.projetoiot.model.animal.Animal
+import com.nohana.projetoiot.model.animal.Disease
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

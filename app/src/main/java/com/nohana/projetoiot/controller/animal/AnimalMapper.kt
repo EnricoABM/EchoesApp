@@ -1,9 +1,9 @@
 package com.nohana.projetoiot.controller.animal
 
 import android.content.Context
-import com.nohana.projetoiot.model.Animal
-import com.nohana.projetoiot.model.Disease
-import com.nohana.projetoiot.model.ListeningPoint
+import com.nohana.projetoiot.model.animal.Animal
+import com.nohana.projetoiot.model.animal.Disease
+import com.nohana.projetoiot.model.animal.ListeningPoint
 import com.nohana.projetoiot.database.relationships.AnimalAndListeningPoint
 
 class AnimalMapper(

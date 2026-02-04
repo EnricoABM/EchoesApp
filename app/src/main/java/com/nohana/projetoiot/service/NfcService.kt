@@ -12,7 +12,7 @@
 //import android.os.Build
 //import android.view.View
 //import android.widget.Toast
-//import com.nohana.projetoiot.model.TagNfc
+//import com.nohana.projetoiot.model.nfc.TagNfc
 //
 //class NfcService {
 //    private val nfcAdapter : NfcAdapter?

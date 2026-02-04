@@ -1,6 +1,7 @@
 package com.nohana.projetoiot.controller.bluetooth
 
 import android.bluetooth.BluetoothSocket
+import com.nohana.projetoiot.model.bluetooth.BluetoothMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException

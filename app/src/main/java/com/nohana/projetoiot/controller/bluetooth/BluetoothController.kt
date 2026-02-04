@@ -11,7 +11,9 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.annotation.RequiresPermission
-import com.nohana.projetoiot.model.Device
+import com.nohana.projetoiot.model.bluetooth.BluetoothDeviceMapper
+import com.nohana.projetoiot.model.bluetooth.BluetoothMessage
+import com.nohana.projetoiot.model.bluetooth.Device
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
