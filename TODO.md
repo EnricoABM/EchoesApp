@@ -1,0 +1,6 @@
+- Alterar a classe de dominio para Anemica
+- Criar classe de Servico para Dominio
+- Criar classe Mapper para Entity para Model
+- Reescrever Dao
+- Reescrever Repository
+- 

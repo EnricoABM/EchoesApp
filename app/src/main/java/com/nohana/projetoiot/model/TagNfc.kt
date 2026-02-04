@@ -11,7 +11,5 @@ data class TagNfc(
     var animal: String,
     var position: String
 ) {
-    override fun toString(): String {
-        return "Animal='$animal', Posição='$position')"
-    }
+
 }

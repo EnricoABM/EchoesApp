@@ -1,0 +1,152 @@
+---
+config:
+  theme: neutral
+  look: neo
+  layout: elk
+---
+classDiagram
+    Animal "1" *-- "*" ListeningPoint: Possui
+    ListeningPoint "1" *-- "*" Disease: Possui
+    ListeningPoint "1" --> "0..1" Disease : Ativo
+    AnimalAndListeningPoint "1" *-- "*" ListeningPointAndDisease : Possui
+    AnimalAndListeningPoint "1" *-- "1" AnimalEntity: Possui
+
+    ListeningPointAndDisease "1" *-- "1" ListeningPointEntity: Possui
+    ListeningPointAndDisease "1" *-- "*" DiseaseEntity : Possui
+    ListeningPointAndDisease "1" *-- "0..1" DiseaseEntity : Possui
+    AnimalRepository ..> AnimalDao : utiliza
+    AnimalRepository ..> ListeningPointDao : utiliza
+    AnimalRepository ..> DiseaseDao : utiliza
+
+    AnimalDatabase "1" --o "1" AnimalDao : fornece
+    AnimalDatabase "1" --o "1" ListeningPointDao : fornece
+    AnimalDatabase "1" --o "1" DiseaseDao : fornece
+
+
+    namespace Entities {
+        class AnimalEntity {
+            -id: Long
+            -name: String
+            -imageUrl: String
+        }
+
+        class ListeningPointEntity {
+            -id: Long
+            -position: String
+            -animalId: Int
+            -activeDiseaseId: Int?
+        }
+
+        class DiseaseEntity {
+            -id: Long
+            -name: String
+            -audioUrl: String
+            -ListeningPointId: Int
+        }
+    }
+
+    namespace Relationships {
+        class AnimalAndListeningPoint {
+            -animal: AnimalEntity
+            -listeningPoints: List~ListeningPointAndDisease~
+        }
+
+        class ListeningPointAndDisease {
+            -listeningPoint: ListeningPointEntity
+            -diseases: List~DiseaseEntity~
+            -activeDisease: DiseaseEntity?
+        }
+    }
+
+    namespace Model {
+        class Animal {
+            -id: Int
+            -name: String
+            -imageUrl: Int
+            -listeningPoints: List~ListeningPoint~
+            +newListeningPoint(id, pos)
+            +addDiseaseToListeningPoint(pos, dis, aud)
+        }
+
+        class ListeningPoint {
+            -id: Int
+            -positionName: String
+            -activeDisease: Disease
+            -diseases: List~Disease~
+            +selectedDisease(disease)
+        }
+        class Disease {
+            -id: Int
+            -name: String
+            -audioUrl: String
+        }
+
+    }
+
+    namespace Database {
+        class AnimalDatabase {
+            -INSTANCE AnimalDatabase
+            +animalDao() AnimalDao
+            +listeningPointDao() ListeningPointDao
+            +diseaseDao() DiseaseDao
+            +getInstance(context: Context) AnimalDatabase
+        }
+
+        class AnimalRepository {
+            -animalDao: AnimalDao
+            -listeningPointDao: ListeningPointDao
+            -diseaseDao: DiseaseDao
+            -animalsLiveData LiveData
+            +insert(animal: Animal) Unit
+            +getAllAnimals() LiveData~List~Animal~~
+            +getAnimalByName(name: String) LiveData~Animal~
+            +animalEntityToAnimal(entity: AnimalAndListeningPoint) Animal
+            +updateActiveDiseases(animal: Animal, id: Int, rel: List~ListeningPointAndDisease~)
+            +getAnimalIdByName(name: String) Int
+            +getPointByAnimalId(animalId: Int) List~ListeningPointAndDisease~
+            +getAnimal(animal: String?) Animal?
+            +getListAnimal() List~AnimalAndListeningPoint~
+        }
+
+        class AnimalDao {
+            +insertAnimal(animal: AnimalEntity) Long
+            +deleteAnimal(animal: AnimalEntity) Unit
+            +updateAnimal(animal: AnimalEntity) Unit
+            +getAllAnimals() LiveData~List~AnimalAndListeningPoint~~
+            +getAnimalIdByName(name: String) Int
+            +getAnimalById(id: Int) LiveData~AnimalAndListeningPoint~
+            +getAnimalByName(name: String) LiveData~AnimalAndListeningPoint~
+            +getAnimalByNameSusp(name: String?) AnimalAndListeningPoint?
+            +getAnimalList() List~AnimalAndListeningPoint~
+        }
+
+        class DiseaseDao {
+            +insertDisease(disease: DiseaseEntity) Long
+            +deleteDisease(disease: DiseaseEntity) Unit
+            +updateDisease(disease: DiseaseEntity) Unit
+            +getAllDiseases() LiveData~List~DiseaseEntity~~
+            +getDiseaseById(id: Int) LiveData~DiseaseEntity~
+            +getDiseaseByListeningPointId(id: Int) List~DiseaseEntity~
+        }
+
+        class ListeningPointDao {
+            +insertListeningPoint(lp: ListeningPointEntity) Long
+            +deleteListeningPoint(lp: ListeningPointEntity) Unit
+            +updateListeningPoint(lp: ListeningPointEntity) Unit
+            +getAllListeningPoints() LiveData~List~ListeningPointAndDisease~~
+            +getListeningPointById(id: Int) LiveData~ListeningPointAndDisease~
+            +getPointByAnimalId(animalId: Int) List~ListeningPointAndDisease~
+        }
+    }
+
+    namespace Controller {
+        class AnimalController
+    }
+
+    namespace ViewModel {
+        class AnimalViewModel
+    }
+
+    namespace View {
+        class AnimalView
+    }
