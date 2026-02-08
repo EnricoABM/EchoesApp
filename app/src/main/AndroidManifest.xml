@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Permissões necessárias para conectar e escanear a partir do Android 12 -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- Se você NÃO usa a varredura para obter a localização do usuário -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /> <!-- Permissões para Android 11 (API 30) e inferior -->
@@ -8,6 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- A localização fina é obrigatória para escaneamento no Android 6 a 11 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- NFC -->
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -38,34 +40,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.aparelhos.Devices"
-            android:exported="false"
-            android:label="@string/title_activity_devices"
-            android:theme="@style/Theme.ProjetoIot" />
-        <activity
-            android:name=".view.nfc.writer.WriterNfcActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.nfc.config.ConfigNfcActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.nfc.ReaderNfcActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.aparelhoconfig.AparelhoConfigActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.ProjetoIot" />
+
     </application>
 
 </manifest>
