@@ -16,6 +16,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -144,7 +145,9 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         else -> {
-                            Column() {
+                            Column(
+                                modifier = Modifier.fillMaxHeight()
+                            ) {
                                 DevicesScreen(
                                     state,
                                     bluetoothViewModel::startScan,
@@ -200,7 +203,7 @@ fun DevicesScreen(
                 start = 10.dp,
                 end = 10.dp,
                 bottom = 60.dp
-            ),
+            ).fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TitleHeader("Dispositivos")

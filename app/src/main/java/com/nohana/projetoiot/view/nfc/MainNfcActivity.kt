@@ -4,11 +4,16 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NdefMessage
+import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
+import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
+import android.nfc.tech.NdefFormatable
+import android.nfc.tech.NfcA
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -24,19 +29,19 @@ import com.nohana.projetoiot.model.nfc.TagNfc
 import com.nohana.projetoiot.view.components.AnimalConfigScreen
 import com.nohana.projetoiot.view.ui.theme.ProjetoIotTheme
 import com.nohana.projetoiot.viewmodel.AnimalViewModel
+import com.nohana.projetoiot.viewmodel.NfcViewModel
 
 class MainNfcActivity : ComponentActivity() {
-    private val nfcAdapter by lazy {
-        NfcAdapter.getDefaultAdapter(this)
-    }
+    private lateinit var nfcViewModel: NfcViewModel
 
-    private lateinit var intentFilter: Array<IntentFilter>
-    private lateinit var pendingIntent: PendingIntent
+    private var writableMode = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val animalViewModel = AnimalViewModel(this)
+        nfcViewModel = NfcViewModel(this)
+        nfcViewModel.enabledNfc()
 
         setContent {
             ProjetoIotTheme {
@@ -50,45 +55,22 @@ class MainNfcActivity : ComponentActivity() {
         }
     }
 
-    private fun configNfc() {
-        if (nfcAdapter == null) {
-            return
-        }
-
-        if (!nfcAdapter!!.isEnabled) {
-            return
-        }
-
-        val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT);
-
-        val ndefFilter = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
-        ndefFilter.addDataType("text/plain")
-
-        intentFilter = arrayOf(ndefFilter)
-
-        nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilter, null)
-    }
-
     override fun onPause() {
         super.onPause()
-        nfcAdapter.disableForegroundDispatch(this)
+        nfcViewModel.disableNfc()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        nfcViewModel.enabledNfc()
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
-        if (intent.action == NfcAdapter.ACTION_NDEF_DISCOVERED) {
-            val ndefMessage = Ndef.get(tag).cachedNdefMessage
-            val records = ndefMessage.records
-            if (records.isNotEmpty()) {
-                val tagNfc = TagNfc(
-                    animal = records[0].payload.toString(),
-                    position = records[1].payload.toString()
-                )
+        if (intent.action == NfcAdapter.ACTION_NDEF_DISCOVERED || intent.action == NfcAdapter.ACTION_TECH_DISCOVERED) {
+            if (writableMode) {
 
-                Log.d("TAG", tagNfc.toString())
             }
         }
     }
