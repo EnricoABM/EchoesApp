@@ -2,16 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permissões necessárias para conectar e escanear a partir do Android 12 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- Se você NÃO usa a varredura para obter a localização do usuário -->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /> <!-- Permissões para Android 11 (API 30) e inferior -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- A localização fina é obrigatória para escaneamento no Android 6 a 11 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- NFC -->
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -23,11 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoIot"
         tools:targetApi="31">
+
         <activity
             android:name=".view.nfc.MainNfcActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main_nfc"
-            android:theme="@style/Theme.ProjetoIot" />
+            android:exported="true"
+            android:label="@string/title_activity_main_nfc" />
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
@@ -36,17 +37,6 @@
             android:theme="@style/Theme.ProjetoIot">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".view.nfc.ReaderNfcActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

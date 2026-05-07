@@ -16,17 +16,25 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,6 +55,7 @@ import com.nohana.projetoiot.view.components.TitleHeader
 import com.nohana.projetoiot.view.nfc.MainNfcActivity
 //import com.nohana.projetoiot.view.nfc.ReaderNfcActivity
 import com.nohana.projetoiot.view.ui.theme.ProjetoIotTheme
+import com.nohana.projetoiot.view.ui.theme.Purple40
 import com.nohana.projetoiot.viewmodel.AnimalViewModel
 import com.nohana.projetoiot.viewmodel.bluetooth.BluetoothUiState
 import com.nohana.projetoiot.viewmodel.bluetooth.BluetoothViewModel
@@ -146,7 +155,9 @@ class MainActivity : ComponentActivity() {
                         }
                         else -> {
                             Column(
-                                modifier = Modifier.fillMaxHeight()
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .verticalScroll(rememberScrollState()),
                             ) {
                                 DevicesScreen(
                                     state,
@@ -173,9 +184,12 @@ fun NavigationButtons() {
 
     Row(
         modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
 
     ) {
-        IconButton(
+        Button(
             onClick = {
                 context.startActivity(Intent(context, MainNfcActivity::class.java))
             }
@@ -187,7 +201,6 @@ fun NavigationButtons() {
         }
     }
 }
-
 
 @Composable
 fun DevicesScreen(
@@ -203,7 +216,8 @@ fun DevicesScreen(
                 start = 10.dp,
                 end = 10.dp,
                 bottom = 60.dp
-            ).fillMaxSize(),
+            )
+            .height(600.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TitleHeader("Dispositivos")
@@ -211,31 +225,27 @@ fun DevicesScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .weight(1f),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            when {
-                !state.devices.isEmpty() -> {
-                    items(
-                        items = state.devices
-                    ) { device ->
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onClickDevice(device) },
-                            text = "${device.name}",
-                            textAlign = TextAlign.Center
-                        )
-                    }
+            if (state.devices.isNotEmpty()) {
+                items(state.devices) { device ->
+                    DeviceCard(
+                        device = device,
+                        onClick = onClickDevice
+                    )
                 }
-                else -> {
-                    item{
-                        Text(
-                            modifier = Modifier.fillMaxSize(),
-                            text = "Nenhum Dispositivo Encontrado",
-                            textAlign = TextAlign.Center,
-                            fontSize = 16.sp
-                        )
-                    }
+            } else {
+                item {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 24.dp),
+                        text = "Nenhum Dispositivo Encontrado",
+                        textAlign = TextAlign.Center,
+                        fontSize = 16.sp
+                    )
                 }
             }
         }
@@ -246,17 +256,59 @@ fun DevicesScreen(
         ) {
             Button(onClick = onStartScan) {
                 Text(
-                    fontSize = 16.sp,
+                    fontSize = 12.sp,
                     text = "Iniciar Varredura"
                 )
             }
             Button(onClick = onStopScan) {
                 Text(
-                    fontSize = 16.sp,
+                    fontSize = 12.sp,
                     text = "Parar Varredura"
                 )
             }
         }
+    }
+}
 
+@Composable
+fun DeviceCard(
+    device: Device,
+    onClick: (Device) -> Unit
+) {
+    Card(
+        onClick = { onClick(device) },
+        modifier = Modifier
+            .fillMaxWidth(0.7f)
+            .padding(vertical = 6.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Purple40,
+            contentColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.smartphone_icon),
+                contentDescription = "Dispositivo Bluetooth",
+                tint = Color.Unspecified,
+                modifier = Modifier.size(24.dp)
+            )
+
+            Spacer(modifier = Modifier.size(12.dp))
+
+            Text(
+                text = device.name ?: "Dispositivo sem nome",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.White
+            )
+        }
     }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.nohana.projetoiot.controller.animal.AnimalController
 import com.nohana.projetoiot.model.animal.Animal
 import com.nohana.projetoiot.model.animal.Scenario
+import com.nohana.projetoiot.model.nfc.TagNfc
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
