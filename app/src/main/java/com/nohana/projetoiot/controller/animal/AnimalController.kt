@@ -17,7 +17,7 @@ class AnimalController(
         animalRepository = AnimalRepository(
             animalDao = db.animalDao(),
             listeningPointDao = db.listeningPointDao(),
-            diseaseDao = db.diseaseDao(),
+            scenarioDao = db.scenarioDao(),
             animalMapper = AnimalMapper(context)
         )
 
@@ -31,7 +31,7 @@ class AnimalController(
 
     }
 
-    suspend fun updateActiveDiseases(animal: Animal) {
+    suspend fun updateActiveScenario(animal: Animal) {
         animalRepository.updateListeningPoints(animal)
     }
 

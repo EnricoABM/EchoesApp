@@ -5,17 +5,17 @@ import androidx.room.Relation
 import com.nohana.projetoiot.database.entities.ScenarioEntity
 import com.nohana.projetoiot.database.entities.ListeningPointEntity
 
-data class ListeningPointAndDisease(
+data class ListeningPointWithScenarios(
     @Embedded var listeningPoint: ListeningPointEntity,
     @Relation(
         parentColumn = "id",
         entityColumn = "listeningPointId"
     )
-    var diseases: List<ScenarioEntity>,
+    var scenarios: List<ScenarioEntity>,
     @Relation(
-        parentColumn = "activeDiseaseId",
+        parentColumn = "activeScenarioId",
         entityColumn = "id"
     )
-    var activeDisease: ScenarioEntity?
+    var activeScenario: ScenarioEntity?
 ) {
 }

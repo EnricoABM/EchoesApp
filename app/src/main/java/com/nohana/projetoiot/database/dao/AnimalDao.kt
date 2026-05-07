@@ -2,7 +2,7 @@ package com.nohana.projetoiot.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.nohana.projetoiot.database.relationships.AnimalAndListeningPoint
+import com.nohana.projetoiot.database.relationships.AnimalWithListeningPoint
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -33,5 +33,5 @@ interface AnimalDao {
 //    suspend fun getAnimalList(): List<AnimalAndListeningPoint>
 
     @Query("SELECT * FROM AnimalEntity")
-    fun getAllAnimals(): Flow<List<AnimalAndListeningPoint>>
+    fun getAllAnimals(): Flow<List<AnimalWithListeningPoint>>
 }

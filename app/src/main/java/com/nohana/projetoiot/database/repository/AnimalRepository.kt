@@ -3,30 +3,16 @@ package com.nohana.projetoiot.database.repository
 import com.nohana.projetoiot.controller.animal.AnimalMapper
 import com.nohana.projetoiot.model.animal.Animal
 import com.nohana.projetoiot.database.dao.AnimalDao
-import com.nohana.projetoiot.database.dao.DiseaseDao
+import com.nohana.projetoiot.database.dao.ScenarioDao
 import com.nohana.projetoiot.database.dao.ListeningPointDao
 import com.nohana.projetoiot.database.entities.ListeningPointEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-//
-//import android.util.Log
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.map
-//import com.nohana.projetoiot.model.animal.Animal
-//import com.nohana.projetoiot.model.database.dao.DiseaseDao
-//import com.nohana.projetoiot.model.database.dao.ListeningPointDao
-//import com.nohana.projetoiot.model.database.dao.AnimalDao
-//import com.nohana.projetoiot.model.database.entities.AnimalEntity
-//import com.nohana.projetoiot.model.database.entities.DiseaseEntity
-//import com.nohana.projetoiot.model.database.entities.ListeningPointEntity
-//import com.nohana.projetoiot.model.database.relationships.AnimalAndListeningPoint
-//import com.nohana.projetoiot.model.database.relationships.ListeningPointAndDisease
-//
 class AnimalRepository(
     private val animalDao: AnimalDao,
     private val listeningPointDao: ListeningPointDao,
-    private val diseaseDao: DiseaseDao,
+    private val scenarioDao: ScenarioDao,
     private val animalMapper: AnimalMapper
 ) {
 
@@ -47,7 +33,7 @@ class AnimalRepository(
                 id = it.id,
                 position = it.positionName,
                 animalId = animal.id,
-                activeDiseaseId = it.activeDisease?.id
+                activeScenarioId = it.activeScenario?.id
             )
 
             listeningPointDao.updateListeningPoint(entity)

@@ -6,22 +6,22 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.nohana.projetoiot.database.entities.DiseaseEntity
+import com.nohana.projetoiot.database.entities.ScenarioEntity
 
 @Dao
-interface DiseaseDao {
-    @Insert suspend fun insertDisease(disease: DiseaseEntity): Long
+interface ScenarioDao {
+    @Insert suspend fun insertDisease(disease: ScenarioEntity): Long
 
-    @Delete suspend fun deleteDisease(disease: DiseaseEntity)
+    @Delete suspend fun deleteDisease(disease: ScenarioEntity)
 
-    @Update suspend fun updateDisease(disease: DiseaseEntity)
+    @Update suspend fun updateDisease(disease: ScenarioEntity)
 
-    @Query("SELECT * FROM DiseaseEntity")
-    fun getAllDiseases(): LiveData<List<DiseaseEntity>>
+    @Query("SELECT * FROM ScenarioEntity")
+    fun getAllDiseases(): LiveData<List<ScenarioEntity>>
 
-    @Query("SELECT * FROM DiseaseEntity WHERE id=:id")
-    fun getDiseaseById(id: Int): LiveData<DiseaseEntity>
+    @Query("SELECT * FROM ScenarioEntity WHERE id=:id")
+    fun getDiseaseById(id: Int): LiveData<ScenarioEntity>
 
-    @Query("SELECT * FROM DiseaseEntity WHERE listeningPointId=:id")
-    fun getDiseaseByListeningPointId(id: Int): List<DiseaseEntity>
+    @Query("SELECT * FROM ScenarioEntity WHERE listeningPointId=:id")
+    fun getDiseaseByListeningPointId(id: Int): List<ScenarioEntity>
 }

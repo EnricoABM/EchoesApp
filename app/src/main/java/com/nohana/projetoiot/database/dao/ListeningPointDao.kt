@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.nohana.projetoiot.database.entities.ListeningPointEntity
-import com.nohana.projetoiot.database.relationships.ListeningPointAndDisease
+import com.nohana.projetoiot.database.relationships.ListeningPointWithScenarios
 
 @Dao
 interface ListeningPointDao {
@@ -18,11 +18,11 @@ interface ListeningPointDao {
     @Update suspend fun updateListeningPoint(listeningPoint: ListeningPointEntity)
 
     @Query("SELECT * FROM ListeningPointEntity")
-    fun getAllListeningPoints(): LiveData<List<ListeningPointAndDisease>>
+    fun getAllListeningPoints(): LiveData<List<ListeningPointWithScenarios>>
 
     @Query("SELECT * FROM ListeningPointEntity WHERE id=:id")
-    fun getListeningPointById(id: Int): LiveData<ListeningPointAndDisease>
+    fun getListeningPointById(id: Int): LiveData<ListeningPointWithScenarios>
 
     @Query("SELECT * FROM ListeningPointEntity WHERE animalId=:animalId")
-    suspend fun getPointByAnimalId(animalId: Int): List<ListeningPointAndDisease>
+    suspend fun getPointByAnimalId(animalId: Int): List<ListeningPointWithScenarios>
 }

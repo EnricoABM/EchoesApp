@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nohana.projetoiot.controller.animal.AnimalController
 import com.nohana.projetoiot.model.animal.Animal
-import com.nohana.projetoiot.model.animal.Disease
+import com.nohana.projetoiot.model.animal.Scenario
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -34,14 +34,14 @@ class AnimalViewModel(
         _selectedAnimal.value = animal
     }
 
-    fun updateActiveDisease(pointId: Int, newDisease: Disease) {
+    fun updateActiveScenario(pointId: Int, newScenario: Scenario) {
         val currentAnimal = _selectedAnimal.value ?: return
 
         // Criamos uma nova lista de pontos preservando os IDs,
         // alterando apenas a activeDisease do ponto clicado.
         val updatedPoints = currentAnimal.listeningPoints.map { point ->
             if (point.id == pointId) {
-                point.copy(activeDisease = newDisease)
+                point.copy(activeScenario = newScenario)
             } else {
                 point
             }
@@ -54,7 +54,7 @@ class AnimalViewModel(
     fun saveToDatabase() {
         _selectedAnimal.value?.let { animal ->
             viewModelScope.launch {
-                controller.updateActiveDiseases(animal)
+                controller.updateActiveScenario(animal)
                 // Opcional: Limpar seleção ou mostrar sucesso
             }
         }

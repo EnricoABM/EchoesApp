@@ -10,7 +10,7 @@ data class ListeningPointEntity(
     var id: Int = 0, // O valor padrão 0 é usado antes da inserção, quando o ID ainda não foi gerado.
     var position: String,
     var animalId: Int,
-    var activeDiseaseId: Int? = null
+    var activeScenarioId: Int? = null
 ) {
 }
 

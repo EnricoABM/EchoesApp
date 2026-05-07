@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nohana.projetoiot.R
 import com.nohana.projetoiot.model.animal.Animal
-import com.nohana.projetoiot.model.animal.Disease
+import com.nohana.projetoiot.model.animal.Scenario
 import com.nohana.projetoiot.viewmodel.AnimalViewModel
 
 
@@ -106,7 +106,7 @@ fun AnimalConfigScreen(
             Log.d("IMG", R.drawable.cachorro.toString())
 
             Image(
-                painter = painterResource(selectedAnimal?.imageUrl ?: R.drawable.animal_placeholder),
+                painter = painterResource(R.drawable.animal_placeholder),
                 contentDescription = "Imagem do Animal",
                 modifier = Modifier
                     .weight(1f)
@@ -130,10 +130,10 @@ fun AnimalConfigScreen(
                 items(animal.listeningPoints) { point ->
                     DiseaseSelector(
                         pointName = point.positionName,
-                        diseases = point.diseases,
-                        activeDisease = point.activeDisease,
-                        onDiseaseSelected = { newDisease ->
-                            viewModel.updateActiveDisease(point.id, newDisease)
+                        scenarios = point.scenarios,
+                        activeScenario = point.activeScenario,
+                        onScenarioSelected = { newScenario ->
+                            viewModel.updateActiveScenario(point.id, newScenario)
                         }
                     )
                 }
@@ -195,9 +195,9 @@ fun AnimalSelector(
 @Composable
 fun DiseaseSelector(
     pointName: String,
-    diseases: List<Disease>,
-    activeDisease: Disease?,
-    onDiseaseSelected: (Disease) -> Unit
+    scenarios: List<Scenario>,
+    activeScenario: Scenario?,
+    onScenarioSelected: (Scenario) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -216,7 +216,7 @@ fun DiseaseSelector(
             modifier = Modifier.weight(1.5f)
         ) {
             OutlinedTextField(
-                value = activeDisease?.name ?: "Nenhuma",
+                value = activeScenario?.name ?: "Nenhuma",
                 onValueChange = {},
                 readOnly = true,
                 label = { Text(pointName)},
@@ -230,11 +230,11 @@ fun DiseaseSelector(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
             ) {
-                diseases.forEach { disease ->
+                scenarios.forEach { scenario ->
                     DropdownMenuItem(
-                        text = { Text(disease.name) },
+                        text = { Text(scenario.name) },
                         onClick = {
-                            onDiseaseSelected(disease)
+                            onScenarioSelected(scenario)
                             expanded = false
                         }
                     )
